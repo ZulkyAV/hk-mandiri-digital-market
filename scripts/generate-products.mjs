@@ -144,9 +144,15 @@ async function run() {
 
     const batches = await Promise.allSettled(active.map((category) => getProducts(category)))
     let addedThisRound = 0
-    for (const batch of batches) {
-      if (batch.status !== 'fulfilled') continue
-      for (const product of batch.value) {
+    const productLists = batches
+      .filter((batch) => batch.status === 'fulfilled')
+      .map((batch) => batch.value)
+    const largestBatch = Math.max(0, ...productLists.map((products) => products.length))
+
+    for (let row = 0; row < largestBatch; row += 1) {
+      for (const productList of productLists) {
+        const product = productList[row]
+        if (!product) continue
         const id = clean(product.productId || product.sku)
         const name = clean(product.productName)
         const imageUrl = clean(product.image)
