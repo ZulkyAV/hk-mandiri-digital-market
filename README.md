@@ -30,7 +30,8 @@ npm run build
 - Node.js version: `22`
 
 Folder `dist` dipublikasikan sebagai Static Assets dan fallback SPA diatur melalui
-`wrangler.jsonc`.
+`wrangler.jsonc`. Pembaruan produksi dikirim dari branch `main` melalui integrasi
+GitHub milik Cloudflare.
 
 ## Sumber katalog
 
