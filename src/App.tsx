@@ -281,7 +281,7 @@ function App() {
           <div><h3>Kontak</h3><a href={`mailto:${CONTACTS.primaryEmail}`}>{CONTACTS.primaryEmail}</a><a href={`mailto:${CONTACTS.secondaryEmail}`}>{CONTACTS.secondaryEmail}</a><a href={`https://wa.me/${CONTACTS.phoneDigits}`}>{CONTACTS.phoneDisplay}</a></div>
           <div className="footer-badge"><Store /><p><b>HK Mandiri</b><small>Digital Market</small></p><CheckCircle2 /></div>
         </div>
-        <div className="container footer-bottom"><span>© {new Date().getFullYear()} HK Mandiri. Semua hak dilindungi.</span><span>Data &amp; foto: <a href="https://world.openfoodfacts.org/" target="_blank" rel="noreferrer">Open Food Facts network</a> (ODbL / CC BY-SA) · Harga katalog merupakan estimasi</span></div>
+        <div className="container footer-bottom"><span>© {new Date().getFullYear()} HK Mandiri. Semua hak dilindungi.</span><span>Katalog versi demo · Harga dan stok merupakan estimasi</span></div>
       </footer>
 
       <nav className="mobile-bottom-nav" aria-label="Navigasi mobile">

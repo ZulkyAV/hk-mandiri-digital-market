@@ -17,18 +17,18 @@ npm run check
 npm run build
 ```
 
-## Cloudflare Pages
+## Cloudflare Workers
 
-- Framework preset: `Vite`
 - Build command: `npm run build`
-- Build output directory: `dist`
+- Deploy command: `npx wrangler deploy`
 - Node.js version: `22`
 
-File `_redirects` dan `_headers` sudah disediakan di folder `public`.
+Folder `dist` dipublikasikan sebagai Static Assets dan fallback SPA diatur melalui
+`wrangler.jsonc`.
 
 ## Sumber katalog
 
-Data nama, merek, dan foto produk bersumber dari jaringan Open Food Facts. Harga adalah
-estimasi harga pasar untuk kebutuhan katalog awal, sedangkan stok merupakan data
-contoh. Data tersedia di bawah lisensi ODbL; foto produk tersedia di
-bawah lisensi CC BY-SA.
+Katalog awal dibuat dari data produk retail Indonesia agar nama dan foto berasal dari
+pasangan data yang sama. Harga adalah estimasi untuk kebutuhan demo, sedangkan stok
+merupakan data contoh. Sebelum dipakai untuk produksi, ganti katalog demo dengan data
+dan aset resmi milik HK Mandiri atau distributor yang memberi izin penggunaan.
