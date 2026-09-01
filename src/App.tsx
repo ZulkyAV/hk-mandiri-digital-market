@@ -16,7 +16,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { AnimatedHero } from './components/AnimatedHero'
 import { CartDrawer } from './components/CartDrawer'
 import { ProductCard } from './components/ProductCard'
-import productsData from './data/products.json'
+import productsData from './data/products'
 import { CONTACTS, formatRupiah, productImageFallback } from './lib/catalog'
 import type { CartItem, Product } from './types'
 
