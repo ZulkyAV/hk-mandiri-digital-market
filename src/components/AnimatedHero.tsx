@@ -1,4 +1,4 @@
-import { ArrowRight, ChevronLeft, ChevronRight, Sparkles, Zap } from 'lucide-react'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { useEffect, useMemo, useState } from 'react'
 import { productImageFallback } from '../lib/catalog'
 import type { Product } from '../types'
@@ -8,56 +8,53 @@ type AnimatedHeroProps = {
   onShop: () => void
 }
 
-const copy = [
+const slides = [
   {
-    eyebrow: 'Belanja harian jadi gampang',
-    title: 'Lebih lengkap, lebih hemat.',
-    description: 'Ratusan kebutuhan rumah dalam satu tempat. Tinggal cari, pilih, lalu pesan.',
+    title: 'Belanja Kebutuhanmu',
+    description: 'Lengkap, hemat, dan terpercaya untuk kebutuhan sehari-harimu.',
+    button: 'Belanja Sekarang',
   },
   {
-    eyebrow: 'Flash sale setiap hari',
-    title: 'Harga merah, dompet cerah.',
-    description: 'Temukan produk favorit dengan promo spesial yang berganti setiap hari.',
+    title: 'Promo Setiap Hari',
+    description: 'Harga pilihan untuk sembako, makanan, minuman, dan kebutuhan rumah.',
+    button: 'Lihat Promo',
   },
   {
-    eyebrow: 'HK Mandiri dekat di hati',
-    title: 'Kebutuhanmu, kami siapin.',
-    description: 'Dari camilan sampai sembako, semuanya siap masuk keranjang.',
+    title: 'Semua Jadi Mudah',
+    description: 'Cari produk, masukkan keranjang, lalu konfirmasi pesanan ke admin.',
+    button: 'Mulai Belanja',
   },
 ]
 
 export function AnimatedHero({ products, onShop }: AnimatedHeroProps) {
   const [active, setActive] = useState(0)
   const featured = useMemo(() => {
-    const flash = products.filter((product) => product.isFlashSale)
-    return [flash[4] || products[4], products[18], products[35]].filter(Boolean)
+    const preferred = ['Sembako', 'Makanan', 'Minuman', 'Kebutuhan Rumah']
+    return preferred
+      .map((category) => products.find((product) => product.category === category))
+      .filter((product): product is Product => Boolean(product))
+      .slice(0, 4)
   }, [products])
 
   useEffect(() => {
-    const timer = window.setInterval(() => setActive((current) => (current + 1) % copy.length), 5200)
+    const timer = window.setInterval(() => setActive((current) => (current + 1) % slides.length), 5200)
     return () => window.clearInterval(timer)
   }, [])
 
   const go = (direction: number) => {
-    setActive((current) => (current + direction + copy.length) % copy.length)
+    setActive((current) => (current + direction + slides.length) % slides.length)
   }
 
   return (
     <section className="hero" aria-label="Promo utama">
-      <div className="hero__confetti" aria-hidden="true">
-        {Array.from({ length: 13 }, (_, index) => <i key={index} />)}
+      <div className="hero__copy" key={slides[active].title}>
+        <h1>{slides[active].title}</h1>
+        <p>{slides[active].description}</p>
+        <button type="button" onClick={onShop}>{slides[active].button}</button>
       </div>
-      <div className="hero__copy" key={`copy-${active}`}>
-        <span className="hero__eyebrow"><Sparkles size={16} /> {copy[active].eyebrow}</span>
-        <h1>{copy[active].title}</h1>
-        <p>{copy[active].description}</p>
-        <button type="button" className="hero__button" onClick={onShop}>
-          Belanja sekarang <ArrowRight size={18} />
-        </button>
-      </div>
-      <div className="hero__visual" key={`visual-${active}`}>
-        <span className="hero__burst">HEMAT<br /><b>SETIAP HARI</b></span>
-        <div className="hero__product-stage">
+
+      <div className="hero__visual" aria-hidden="true">
+        <div className="hero__products">
           {featured.map((product, index) => (
             <img
               key={product.id}
@@ -68,23 +65,19 @@ export function AnimatedHero({ products, onShop }: AnimatedHeroProps) {
             />
           ))}
         </div>
-        <span className="hero__promo-pill"><Zap size={16} fill="currentColor" /> PROMO!</span>
+        <div className="hero__basket"><i /><i /><i /><i /></div>
       </div>
-      <button type="button" className="hero__arrow hero__arrow--left" onClick={() => go(-1)} aria-label="Promo sebelumnya">
-        <ChevronLeft size={22} />
-      </button>
-      <button type="button" className="hero__arrow hero__arrow--right" onClick={() => go(1)} aria-label="Promo berikutnya">
-        <ChevronRight size={22} />
-      </button>
-      <div className="hero__dots" role="tablist" aria-label="Pilih promo">
-        {copy.map((item, index) => (
+
+      <button type="button" className="hero__arrow hero__arrow--left" onClick={() => go(-1)} aria-label="Promo sebelumnya"><ChevronLeft /></button>
+      <button type="button" className="hero__arrow hero__arrow--right" onClick={() => go(1)} aria-label="Promo berikutnya"><ChevronRight /></button>
+      <div className="hero__dots">
+        {slides.map((slide, index) => (
           <button
             type="button"
-            key={item.title}
+            key={slide.title}
             className={index === active ? 'is-active' : ''}
-            aria-label={`Promo ${index + 1}`}
-            aria-selected={index === active}
             onClick={() => setActive(index)}
+            aria-label={`Promo ${index + 1}`}
           />
         ))}
       </div>
