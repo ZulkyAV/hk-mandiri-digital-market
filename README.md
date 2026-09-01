@@ -3,6 +3,12 @@
 Katalog minimarket digital HK Mandiri dengan 900 produk, flash sale, pencarian,
 filter kategori, keranjang belanja, dan pemesanan melalui WhatsApp.
 
+## Tampilan toko
+
+Antarmuka memakai tema minimarket merah-hitam yang responsif. Halaman utama berisi
+hero promosi, kategori, promo hari ini, produk populer, serta ringkasan keranjang
+di desktop. Versi mobile menggunakan susunan navigasi dan katalog yang lebih ringkas.
+
 ## Menjalankan lokal
 
 ```bash
